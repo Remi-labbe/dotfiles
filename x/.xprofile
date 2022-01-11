@@ -1,4 +1,10 @@
 #!/bin/bash
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+
+export PATH="$PATH:$HOME/.local/bin:$HOME/.local/bin/status"
+
 export TERMINAL="alacritty"
 export EDITOR="nvim"
 export FILE="pcmanfm"
