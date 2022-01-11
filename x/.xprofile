@@ -3,6 +3,7 @@ export TERMINAL="alacritty"
 export EDITOR="nvim"
 export FILE="pcmanfm"
 
+export WGETRC="$XDG_CONFIG_HOME/wgetrc"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 export NODE_REPL_HISTORY="$XDG_DATA_HOME/node_repl_history"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
