@@ -11,12 +11,9 @@ local formatting = null_ls.builtins.formatting
 null_ls.setup({
 	debug = false,
 	sources = {
-		-- formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
-    -- formatting.uncrustify.with({ args = { "-q",
-    --                                       "-l <LANG>",
-    --                                       "-c ~/.config/.uncrustify069_c.cfg",
-    --                                       "--replace",
-    --                                       "--no-backup",
-    --                                     }})
+		formatting.prettier.with({ extra_args = { "--single-quote", "--jsx-single-quote" } }),
+    -- formatting.uncrustify.with({ extra_args = {
+    --                                "-c ~/.config/.uncrustify069_c.cfg",
+    --                                } })
 	},
 })
