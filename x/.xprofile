@@ -3,11 +3,12 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 
-export PATH="$PATH:$HOME/.local/bin:$HOME/.local/bin/status"
+export PATH="$PATH:$HOME/.local/bin:$HOME/.local/bin/status:$XDG_DATA_HOME/cargo/bin"
 
 export TERMINAL="alacritty"
 export EDITOR="nvim"
 export FILE="pcmanfm"
+export BROWSER="brave"
 
 export WGETRC="$XDG_CONFIG_HOME/wgetrc"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
@@ -18,4 +19,5 @@ export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export LESSHISTFILE="-"
 export KDEHOME="$XDG_CONFIG_HOME/kde"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-
+export RUSTUP_HOME="$XDG_CONFIG_HOME/rustup"
+# export AWT_TOOLKIT=MToolkit
