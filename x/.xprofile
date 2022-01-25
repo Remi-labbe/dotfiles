@@ -21,3 +21,8 @@ export KDEHOME="$XDG_CONFIG_HOME/kde"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export RUSTUP_HOME="$XDG_CONFIG_HOME/rustup"
 # export AWT_TOOLKIT=MToolkit
+
+# Don't Randomly Turn off
+xset s off
+xset -dpms
+xset s noblank
