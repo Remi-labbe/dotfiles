@@ -71,11 +71,6 @@ compinit
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
-xset r rate 210 40
-
-# Speedy keys
-# xset r rate 210 40
-
 # For QT Themes
 export QT_QPA_PLATFORMTHEME=qt5ct
 
@@ -83,5 +78,3 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 # setxkbmap -option caps:escape
 # swap escape and caps
 # setxkbmap -option caps:swapescape
-
-
