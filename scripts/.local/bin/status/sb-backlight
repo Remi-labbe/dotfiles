@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# show backlight level
+
+status="💡"
+
+level=$(xbacklight -get)
+level=${level%.*}
+
+printf "%s %d%%" "$status" "$level"

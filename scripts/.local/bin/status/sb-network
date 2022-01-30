@@ -1,0 +1,13 @@
+#!/bin/sh
+
+if [ $(cat /sys/class/net/enp0s25/operstate 2>/dev/null) = "up" ]; then
+    status="🌐"
+    netname="$(iw dev enp0s25 info | grep ssid| awk '{print $2}')"
+elif [ $(cat /sys/class/net/wlp3s0/operstate 2>/dev/null) = "up" ]; then
+    status="📶"
+    netname="$(iw dev wlp3s0 info | grep ssid| awk '{print $2}')"
+else
+    printf "❌" && exit
+fi
+
+printf "%s %s" "$status" "$netname" && exit 0

@@ -1,0 +1,68 @@
+#!/bin/sh
+
+declare -a actions=(
+"Logout"
+"Lock screen"
+"Reboot"
+"Shutdown"
+"Suspend"
+"Cancel"
+)
+
+choice=$(printf '%s\n' "${actions[@]}" | dmenu -i -p 'Sys-action:')
+
+case $choice in
+    'Logout')
+        answer="$(printf "No\\nYes" | dmenu -i -p "Logout?")"
+
+        if [[ $answer == "Yes" ]]; then
+            killall dwm || echo "Process was not running."
+        fi
+
+        if [[ $answer == "No" ]]; then
+            echo "Aborted" && exit 1
+        fi
+        ;;
+    'Lock screen')
+        slock
+        ;;
+    'Reboot')
+        answer="$(printf "No\\nYes" | dmenu -i -p "Reboot?")"
+
+        if [[ $answer == "Yes" ]]; then
+            systemctl reboot
+        fi
+
+        if [[ $answer == "No" ]]; then
+            echo "Aborted" && exit 1
+        fi
+        ;;
+    'Shutdown')
+        answer="$(printf "No\\nYes" | dmenu -i -p "Shutdown?")"
+
+        if [[ $answer == "Yes" ]]; then
+            systemctl poweroff
+        fi
+
+        if [[ $answer == "No" ]]; then
+            echo "Aborted" && exit 1
+        fi
+        ;;
+    'Suspend')
+        answer="$(printf "No\\nYes" | dmenu -i -p "Suspend?")"
+
+        if [[ $answer == "Yes" ]]; then
+            systemctl suspend
+        fi
+
+        if [[ $answer == "No" ]]; then
+            echo "Aborted" && exit 0
+        fi
+        ;;
+    'Cancel')
+        echo "Canceled" && exit 0
+    ;;
+    *)
+        echo "Abroted" && exit 0
+    ;;
+esac

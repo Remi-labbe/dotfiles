@@ -1,0 +1,27 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+	1) echo "bat";;
+esac
+
+full_bat=0
+curr_bat=0
+icon="🔋"
+
+# Loop through all batteries
+for battery in /sys/class/power_supply/BAT?
+do
+    status=$(cat "$battery/status")
+    full_bat=$(($full_bat+$(cat "$battery"/energy_full)))
+    curr_bat=$(($curr_bat+$(cat "$battery"/energy_now)))
+
+    [ "$status" = "Charging" ] && icon="🔌"
+done
+
+curr_percent=$(($curr_bat*100))
+curr_percent=$(($curr_percent/$full_bat))
+
+[ "$icon" = "🔋" ] && [ "$curr_percent" -le 25 ] && warn="❗"
+
+printf "%s%s %d%%" "$warn" "$icon" "$curr_percent";
+exit 0;
