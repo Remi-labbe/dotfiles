@@ -139,6 +139,13 @@ _G.packer_plugins = {
     path = "/home/remi/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
+  ["iron.nvim"] = {
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/remi/.local/share/nvim/site/pack/packer/opt/iron.nvim",
+    url = "https://github.com/hkupty/iron.nvim"
+  },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/home/remi/.local/share/nvim/site/pack/packer/start/lualine.nvim",
@@ -222,6 +229,13 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+vim.cmd [[augroup packer_load_aucmds]]
+vim.cmd [[au!]]
+  -- Filetype lazy-loads
+time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType ocaml ++once lua require("packer.load")({'iron.nvim'}, { ft = "ocaml" }, _G.packer_plugins)]]
+time([[Defining lazy-load filetype autocommands]], false)
+vim.cmd("augroup END")
 if should_profile then save_profiles() end
 
 end)
