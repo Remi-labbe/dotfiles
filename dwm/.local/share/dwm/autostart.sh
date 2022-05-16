@@ -3,4 +3,5 @@ dwmblocks &
 picom -b
 lxsession &
 feh --no-fehbg --bg-center $XDG_CONFIG_HOME/wall.jpg &
+nm-applet --indicator &
 dunst &
