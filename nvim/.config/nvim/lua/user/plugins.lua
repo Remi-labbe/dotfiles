@@ -48,7 +48,7 @@ return packer.startup(function(use)
   use "numToStr/Comment.nvim" -- Easily comment stuff
   use "kyazdani42/nvim-web-devicons"
   use { "kyazdani42/nvim-tree.lua", requires = 'kyazdani42/nvim-web-devicons'}
-  use { "akinsho/bufferline.nvim", requires = 'kyazdani42/nvim-web-devicons'}
+  use { "akinsho/bufferline.nvim", tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
   use "moll/vim-bbye"
   use { "nvim-lualine/lualine.nvim", requires = 'kyazdani42/nvim-web-devicons'}
 --  use "akinsho/toggleterm.nvim"
@@ -99,6 +99,9 @@ return packer.startup(function(use)
 
   -- repl for ocaml
   use {"hkupty/iron.nvim", ft = {"ocaml"} }
+
+  -- distraction free
+  use "Pocco81/TrueZen.nvim"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
