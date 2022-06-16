@@ -4,5 +4,6 @@ HISTSIZE=1000000
 SAVEHIST=1000000
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
 # eval "$(zoxide init zsh)"
 # eval "`pip completion --zsh`"
