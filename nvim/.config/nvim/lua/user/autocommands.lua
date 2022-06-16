@@ -31,7 +31,4 @@ vim.cmd [[
     autocmd FileType markdown let b:noStripWhitespace=1
     autocmd BufWritePre * call StripTrailingWhitespace()
   augroup end
-  augroup _nvimtree
-    autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
-  augroup end
 ]]
