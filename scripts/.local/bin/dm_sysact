@@ -14,9 +14,10 @@ choice=$(printf '%s\n' "${actions[@]}" | dmenu -i -p 'Sys-action:')
 case $choice in
     'Logout')
         answer="$(printf "No\\nYes" | dmenu -i -p "Logout?")"
+        wm="$(echo $XDG_SESSION_DESKTOP)"
 
         if [[ $answer == "Yes" ]]; then
-            killall dwm || echo "Process was not running."
+            killall $wm || echo "Process was not running. ($wm)"
         fi
 
         if [[ $answer == "No" ]]; then
