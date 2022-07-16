@@ -1,34 +1,26 @@
-vim.cmd [[
-  augroup _general_settings
-    autocmd!
-    autocmd FileType qf,help,man,lspinfo nnoremap <silent> <buffer> q :close<CR>
-    autocmd TextYankPost * silent!lua require('vim.highlight').on_yank({higroup = 'Search', timeout = 200})
-    autocmd BufWinEnter * :set formatoptions-=cro
-    autocmd FileType qf set nobuflisted
-  augroup end
-  augroup _asm
-    autocmd!
-    autocmd FileType asm setlocal noexpandtab
-  augroup end
-  augroup _git
-    autocmd!
-    autocmd FileType gitcommit setlocal wrap
-  augroup end
-  augroup _markdown
-    autocmd!
-    autocmd FileType markdown setlocal wrap
-  augroup end
-  fun! StripTrailingWhitespace()
-      if exists('b:noStripWhitespace')
-          return
-      endif
-      let l:save = winsaveview()
-      keeppatterns %s/\s\+$//e
-      call winrestview(l:save)
-  endfun
-  augroup _trimtrailingwhitespaces
-    autocmd!
-    autocmd FileType markdown let b:noStripWhitespace=1
-    autocmd BufWritePre * call StripTrailingWhitespace()
-  augroup end
-]]
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
+local usercmd = vim.api.nvim_create_user_command
+
+local yank_group = augroup('HighlightYank', {})
+
+autocmd('TextYankPost', {
+    group = yank_group,
+    pattern = '*',
+    callback = function()
+        vim.highlight.on_yank({
+            higroup = 'IncSearch',
+            timeout = 40,
+        })
+    end,
+})
+
+local userGroup = augroup('UserCmds', {})
+
+autocmd({ "BufWritePre" }, {
+    group = userGroup,
+    pattern = "*",
+    command = "%s/\\s\\+$//e",
+})
+
+usercmd("Format", "lua vim.lsp.buf.formatting()", {})

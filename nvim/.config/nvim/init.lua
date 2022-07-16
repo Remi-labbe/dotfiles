@@ -1,20 +1,8 @@
-require "user.options"
-require "user.keymaps"
-require "user.plugins"
-require "user.colorscheme"
-require "user.cmp"
-require "user.lsp"
-require "user.telescope"
-require "user.treesitter"
-require "user.autopairs"
-require "user.comments"
-require "user.gitsigns"
-require "user.nvim-tree"
-require "user.bufferline"
-require "user.lualine"
-require "user.impatient"
-require "user.indent-blankline"
-require "user.autocommands"
-require "user.iron"
-require "user.truezen"
--- require "user.rust-tools"
+require("user.plugins")
+require("user.colors")
+require("user.sets")
+require("user.autocommands")
+require("user.treesitter")
+require("user.keymaps")
+require("user.comment")
+require("user.lsp")
