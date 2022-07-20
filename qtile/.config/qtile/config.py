@@ -163,7 +163,7 @@ widgets = [
         scale=0.7,
     ),
     widget.WindowName(
-        padding=5,
+        padding=10,
         foreground=COLORS["gray1"],
         background=COLORS["yellow"],
     ),
@@ -192,6 +192,13 @@ screens = [
     Screen(
         top=bar.Bar(
             widgets,
+            28,
+        ),
+    ),
+    Screen(
+        top=bar.Bar(
+            # removing systray from second screen
+            widgets[:-1],
             28,
         ),
     ),
