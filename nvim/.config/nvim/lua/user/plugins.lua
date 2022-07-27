@@ -36,6 +36,8 @@ return require('packer').startup(function(use)
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
 
+    use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+
     -- Sweet Lsp
     use "neovim/nvim-lspconfig"
     use "williamboman/mason.nvim"
