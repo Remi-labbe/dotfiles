@@ -6,9 +6,9 @@ import os
 
 from widgets.my_volume import MyVolume
 
-mod = "mod4" # set mod to super key
+mod = "mod4"  # set mod to super key
 terminal = "alacritty -e zsh"
-dmenu_run = "dmenu_run -m 0 -p \"run:\""
+dmenu_run = 'dmenu_run -m 0 -p "run:"'
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -21,14 +21,23 @@ keys = [
     Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
-    Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
-    Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
+    Key(
+        [mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"
+    ),
+    Key(
+        [mod, "shift"],
+        "l",
+        lazy.layout.shuffle_right(),
+        desc="Move window to the right",
+    ),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
     Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
-    Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
+    Key(
+        [mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"
+    ),
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
@@ -41,47 +50,32 @@ keys = [
         lazy.window.kill(),
         desc="Kill focused window",
     ),
-    Key(
-        [mod, "shift"],
-        "r",
-        lazy.reload_config(),
-        desc="Reload the config"
-    ),
-    Key(
-        [mod, "shift"],
-        "q",
-        lazy.spawn("dm_sysact"),
-        desc="Reload the config"
-    ),
+    Key([mod, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
+    Key([mod, "shift"], "q", lazy.spawn("dm_sysact"), desc="Reload the config"),
     Key([mod], "p", lazy.spawn(dmenu_run), desc="Run dmenu"),
-    Key(
-        [mod],
-        "backslash",
-        lazy.spawn("dm_maim"),
-        desc="Run dmenu"
-    ),
+    Key([mod], "backslash", lazy.spawn("dm_maim"), desc="Run dmenu"),
     # SOUND
-    Key(
-        [],
-        "XF86AudioMute",
-        lazy.spawn("pamixer -t"),
-        desc="mute sound"
-    ),
+    Key([], "XF86AudioMute", lazy.spawn("pamixer -t"), desc="mute sound"),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("pamixer -i 5"), desc="volume +"),
     Key([], "XF86AudioLowerVolume", lazy.spawn("pamixer -d 5"), desc="volume -"),
-    Key([], "XF86AudioMicMute", lazy.spawn("pactl set-source-mute @DEFAULT_SOURCE@ toggle"), desc="mute mic"),
+    Key(
+        [],
+        "XF86AudioMicMute",
+        lazy.spawn("pactl set-source-mute @DEFAULT_SOURCE@ toggle"),
+        desc="mute mic",
+    ),
     # BRIGHTNESS
     Key(
         [],
         "XF86MonBrightnessUp",
         lazy.spawn("xbacklight -inc 5"),
-        desc="increase brightness"
+        desc="increase brightness",
     ),
     Key(
         [],
         "XF86MonBrightnessDown",
         lazy.spawn("xbacklight -dec 5"),
-        desc="decrease brightness"
+        desc="decrease brightness",
     ),
 ]
 
@@ -100,29 +94,42 @@ for i in groups:
             Key(
                 [mod, "shift"],
                 i.name,
-                lazy.window.togroup(i.name,
+                lazy.window.togroup(
+                    i.name,
                     # switch to group when moving window
                     # switch_group=True
                 ),
-                desc="move focused window to group {}".format(i.name)
+                desc="move focused window to group {}".format(i.name),
             ),
         ]
     )
 
 # Setting colors
-COLORS = dict(
-    gray1 = "#20201d",
-    gray2 = "#928374",
-    gray3 = "#eaeaea",
-    yellow = "#fabd2f",
-    green = "#98971a",
+Gruvbox = dict(
+    gray1="#20201d",
+    gray2="#928374",
+    gray3="#eaeaea",
+    accent1="#fabd2f",
+    accent2="#98971a",
 )
 
-layout_theme = {"border_width": 1,
-                "margin": 4,
-                "border_focus": COLORS["yellow"],
-                "border_normal": COLORS["gray2"],
-                }
+TokyoNight = dict(
+    gray1="#1a1b26",
+    gray2="#414868",
+    gray3="#c0caf5",
+    accent1="#7aa2f7",
+    accent2="#bb9af7",
+)
+
+COLORS = TokyoNight
+
+
+layout_theme = {
+    "border_width": 1,
+    "margin": 4,
+    "border_focus": COLORS["accent1"],
+    "border_normal": COLORS["gray2"],
+}
 
 layouts = [
     layout.MonadTall(
@@ -133,7 +140,7 @@ layouts = [
     ),
     layout.Max(),
     layout.Floating(
-        border_focus=COLORS["green"],
+        border_focus=COLORS["accent2"],
     ),
 ]
 
@@ -149,42 +156,39 @@ extension_defaults = widget_defaults.copy()
 
 widgets = [
     widget.GroupBox(
-        highlight_method='block',
+        highlight_method="block",
         hide_unused=True,
-        rounded = False,
-        padding_x = 6,
-        padding_y = 2,
-        this_current_screen_border=COLORS["yellow"],
-        this_screen_border=COLORS["yellow"],
+        rounded=False,
+        padding_x=6,
+        padding_y=2,
+        this_current_screen_border=COLORS["accent1"],
+        this_screen_border=COLORS["accent1"],
         block_highlight_text_color=COLORS["gray1"],
     ),
     widget.CurrentLayoutIcon(
-        padding = 2,
+        padding=2,
         scale=0.7,
     ),
     widget.WindowName(
         padding=10,
         foreground=COLORS["gray1"],
-        background=COLORS["yellow"],
+        background=COLORS["accent1"],
     ),
     MyVolume(
-        padding = 5,
+        padding=5,
     ),
     widget.Battery(
-        padding = 10,
-        charge_char='🔌',
-        discharge_char='🔋',
-        full_char='✅',
-        unknown_char='🔋',
+        padding=10,
+        charge_char="🔌",
+        discharge_char="🔋",
+        full_char="✅",
+        unknown_char="🔋",
         show_short_text=False,
         low_percentage=0.25,
-        format='{char}{percent:2.0%}',
+        format="{char}{percent:2.0%}",
         update_interval=20,
     ),
-    widget.Clock(
-        padding = 5,
-        format="📅 %Y %b %d (%a) 🕓 %I:%M %p"
-    ),
+    widget.Clock(padding=5, format="📅 %Y %b %d (%a) 🕓 %I:%M %p"),
     widget.Systray(),
 ]
 
@@ -206,8 +210,15 @@ screens = [
 
 # Drag floating layouts.
 mouse = [
-    Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
-    Drag([mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+    Drag(
+        [mod],
+        "Button1",
+        lazy.window.set_position_floating(),
+        start=lazy.window.get_position(),
+    ),
+    Drag(
+        [mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
+    ),
     Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
 
@@ -236,7 +247,8 @@ reconfigure_screens = True
 # focus, should we respect this or not?
 auto_minimize = True
 
+
 @hook.subscribe.startup_once
 def start_once():
-    home = os.path.expanduser('~')
-    subprocess.call([home + '/.config/qtile/autostart.sh'])
+    home = os.path.expanduser("~")
+    subprocess.call([home + "/.config/qtile/autostart.sh"])
