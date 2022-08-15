@@ -8,3 +8,7 @@ end)
 nnoremap("<Leader>ps", function()
     require('telescope.builtin').live_grep()
 end)
+
+nnoremap("<Leader>pb", function()
+    require('telescope.builtin').buffers()
+end)

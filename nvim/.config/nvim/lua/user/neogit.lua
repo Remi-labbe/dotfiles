@@ -9,3 +9,5 @@ end
 neogit.setup{}
 
 nnoremap("<leader>ng", neogit.open)
+
+nnoremap("<leader>gf", "<cmd>!git fetch --all<CR>")

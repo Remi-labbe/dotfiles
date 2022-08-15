@@ -12,10 +12,4 @@ vnoremap("K", ":m '<-2<CR>gv=gv")
 vnoremap(">", ">gv")
 vnoremap("<", "<gv")
 
--- TrueZen Mode
-nnoremap("<leader>tz", ":TZAtaraxis<CR>")
-
--- Open Trouble DiagList
-nnoremap("<leader>q", "<cmd>TroubleToggle<CR>")
-
 require("user.keymaps.telescope")

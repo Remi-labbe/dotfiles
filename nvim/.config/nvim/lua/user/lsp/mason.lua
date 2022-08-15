@@ -55,7 +55,9 @@ lspconfig.pyright.setup(config())
 
 lspconfig.tsserver.setup(config())
 
-lspconfig.html.setup(config())
+-- lspconfig.html.setup(config())
+
+lspconfig.emmet_ls.setup(config())
 
 lspconfig.sumneko_lua.setup(config({
     root_dir = util.root_pattern(".luarc.json", ".luacheckrc", ".stylua.toml",
@@ -90,3 +92,5 @@ if not rust_tools_status_ok then
     return
 end
 rust_tools.setup(rust_opts)
+
+lspconfig.ocamllsp.setup(config())
