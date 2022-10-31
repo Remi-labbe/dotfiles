@@ -327,59 +327,59 @@ colors:
   #transparent_background_colors: false
 
   # Gruvbox Dark
-  # primary:
-  #   background: '#282828'
-  # foreground: '#ebdbb2'
-  # cursor:
-  #   text: '#282828'
-  #   cursor: '#ebdbb2'
-  # selection:
-  #   text: '#d5c4a1'
-  #   background: '#3c3836'
-  # normal:
-  #   black:   '#282828'
-  #   red:     '#cc241d'
-  #   green:   '#98971a'
-  #   yellow:  '#d79921'
-  #   blue:    '#458588'
-  #   magenta: '#b16286'
-  #   cyan:    '#689d6a'
-  #   white:   '#a89984'
-  # bright:
-  #   black:   '#928374'
-  #   red:     '#fb4939'
-  #   green:   '#b8bb26'
-  #   yellow:  '#fabd2f'
-  #   blue:    '#83a598'
-  #   magenta: '#d3869b'
-  #   cyan:    '#8ec07c'
-  #   white:   '#ebdbb9'
+  primary:
+    background: '#282828'
+  foreground: '#ebdbb2'
+  cursor:
+    text: '#282828'
+    cursor: '#ebdbb2'
+  selection:
+    text: '#d5c4a1'
+    background: '#3c3836'
+  normal:
+    black:   '#282828'
+    red:     '#cc241d'
+    green:   '#98971a'
+    yellow:  '#d79921'
+    blue:    '#458588'
+    magenta: '#b16286'
+    cyan:    '#689d6a'
+    white:   '#a89984'
+  bright:
+    black:   '#928374'
+    red:     '#fb4939'
+    green:   '#b8bb26'
+    yellow:  '#fabd2f'
+    blue:    '#83a598'
+    magenta: '#d3869b'
+    cyan:    '#8ec07c'
+    white:   '#ebdbb9'
 
   # TokyoNight night
-  primary:
-    background: '#1a1b26'
-    foreground: '#c0caf5'
-  normal:
-    black:   '#15161E'
-    red:     '#f7768e'
-    green:   '#9ece6a'
-    yellow:  '#e0af68'
-    blue:    '#7aa2f7'
-    magenta: '#bb9af7'
-    cyan:    '#7dcfff'
-    white:   '#a9b1d6'
-  bright:
-    black:   '#414868'
-    red:     '#f7768e'
-    green:   '#9ece6a'
-    yellow:  '#e0af68'
-    blue:    '#7aa2f7'
-    magenta: '#bb9af7'
-    cyan:    '#7dcfff'
-    white:   '#c0caf5'
-  indexed_colors:
-    - { index: 16, color: '#ff9e64' }
-    - { index: 17, color: '#db4b4b' }
+  # primary:
+  #   background: '#1a1b26'
+  #   foreground: '#c0caf5'
+  # normal:
+  #   black:   '#15161E'
+  #   red:     '#f7768e'
+  #   green:   '#9ece6a'
+  #   yellow:  '#e0af68'
+  #   blue:    '#7aa2f7'
+  #   magenta: '#bb9af7'
+  #   cyan:    '#7dcfff'
+  #   white:   '#a9b1d6'
+  # bright:
+  #   black:   '#414868'
+  #   red:     '#f7768e'
+  #   green:   '#9ece6a'
+  #   yellow:  '#e0af68'
+  #   blue:    '#7aa2f7'
+  #   magenta: '#bb9af7'
+  #   cyan:    '#7dcfff'
+  #   white:   '#c0caf5'
+  # indexed_colors:
+  #   - { index: 16, color: '#ff9e64' }
+  #   - { index: 17, color: '#db4b4b' }
 
 # Bell
 #

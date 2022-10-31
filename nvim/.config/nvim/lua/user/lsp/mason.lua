@@ -57,7 +57,9 @@ lspconfig.tsserver.setup(config())
 
 -- lspconfig.html.setup(config())
 
-lspconfig.emmet_ls.setup(config())
+--[[ lspconfig.emmet_ls.setup(config()) ]]
+--
+lspconfig.cssls.setup(config())
 
 lspconfig.sumneko_lua.setup(config({
     root_dir = util.root_pattern(".luarc.json", ".luacheckrc", ".stylua.toml",
@@ -94,3 +96,7 @@ end
 rust_tools.setup(rust_opts)
 
 lspconfig.ocamllsp.setup(config())
+
+lspconfig.yamlls.setup(config())
+
+lspconfig.lemminx.setup(config())

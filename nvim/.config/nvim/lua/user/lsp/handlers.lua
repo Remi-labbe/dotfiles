@@ -89,7 +89,7 @@ local function keymaps()
   nnoremap("gd", function() vim.lsp.buf.definition() end)
   nnoremap("gi", function() vim.lsp.buf.implementation() end)
   nnoremap("gr", function() vim.lsp.buf.references() end)
-  -- nnoremap("K", function() vim.lsp.buf.signature_help() end)
+  --[[ nnoremap("K", function() vim.lsp.buf.signature_help() end) ]]
   nnoremap("K", function() vim.lsp.buf.hover() end)
   nnoremap("<leader>ws", function() vim.lsp.buf.workspace_symbol() end)
   nnoremap("<leader>wa", function() vim.lsp.buf.add_workspace_folder() end)
@@ -107,14 +107,17 @@ M.on_attach = function(client)
   keymaps()
   lsp_highlight_document(client)
 
-  if client.name == "jdt.ls" then
-    -- TODO: instantiate capabilities in java file later
-    -- client.resolved_capabilities.document_formatting = false
+  if client.name == "jdtls" then
+    --[[ client.resolved_capabilities.document_formatting = false ]]
     -- client.resolved_capabilities.textDocument.completionItem.snippetSupport = false
     vim.lsp.codelens.refresh()
     require("jdtls").setup_dap { hotcodereplace = "auto" }
     require("jdtls.dap").setup_dap_main_class_configs()
     -- require("jdtls.setup").add_commands()
+  end
+
+  if client.name == "tsserver" then
+    client.resolved_capabilities.document_formatting = false
   end
 end
 

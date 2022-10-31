@@ -29,6 +29,14 @@ return require('packer').startup(function(use)
   use "nvim-lua/popup.nvim"
   use "nvim-lua/plenary.nvim"
 
+  use {
+    'kyazdani42/nvim-tree.lua',
+    requires = {
+      'kyazdani42/nvim-web-devicons', -- optional, for file icons
+    },
+    tag = 'nightly' -- optional, updated every week. (see issue #1193)
+  }
+
   -- Find the way
   use {
     'nvim-telescope/telescope.nvim',
@@ -40,7 +48,11 @@ return require('packer').startup(function(use)
   -- git
   --[[ use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' } ]]
 
-  use {"akinsho/toggleterm.nvim", tag = 'v2.*'}
+  use {
+    'lewis6991/gitsigns.nvim',
+    -- tag = 'release' -- To use the latest release (do not use this if you run Neovim nightly or dev builds!)
+  }
+  use { "akinsho/toggleterm.nvim", tag = 'v2.*' }
 
   -- Sweet Lsp
   use "neovim/nvim-lspconfig"
@@ -81,6 +93,7 @@ return require('packer').startup(function(use)
   -- Make things easier to see
   use "RRethy/vim-illuminate"
   use "norcalli/nvim-colorizer.lua"
+  use "gpanders/editorconfig.nvim"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

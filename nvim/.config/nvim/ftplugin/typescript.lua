@@ -1,0 +1,47 @@
+require("user.dap")
+
+vim.opt.colorcolumn = "120"
+--[[ vim.opt.shiftwidth = 4 ]]
+--[[ vim.opt.tabstop = 4 ]]
+--[[ vim.opt.softtabstop = 4 ]]
+
+local dap = require('dap')
+dap.adapters.node2 = {
+  type = 'executable',
+  command = 'node',
+  args = { os.getenv('XDG_CONFIG_HOME') .. '/nvim/vscode-node-debug2/out/src/nodeDebug.js' },
+}
+
+dap.configurations.typescript = {
+  {
+    name = "ts-node DEBUG",
+    type = "node2",
+    request = "launch",
+    cwd = vim.loop.cwd(),
+    runtimeArgs = { "run", "start:debug" },
+    runtimeExecutable = "npm",
+  },
+  {
+    name = "ts-node (Node2 with ts-node)",
+    type = "node2",
+    request = "launch",
+    cwd = vim.loop.cwd(),
+    runtimeArgs = { "-r", "ts-node/register" },
+    runtimeExecutable = "node",
+    args = { "--inspect", "${file}" },
+    sourceMaps = true,
+    skipFiles = { "<node_internals>/**", "node_modules/**" },
+  },
+  {
+    name = "Jest (Node2 with ts-node)",
+    type = "node2",
+    request = "launch",
+    cwd = vim.loop.cwd(),
+    runtimeArgs = { "--inspect-brk", "${workspaceFolder}/node_modules/.bin/jest" },
+    runtimeExecutable = "node",
+    args = { "${file}", "--runInBand", "--coverage", "false" },
+    sourceMaps = true,
+    port = 9229,
+    skipFiles = { "<node_internals>/**", "node_modules/**" },
+  },
+}

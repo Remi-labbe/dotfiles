@@ -10,10 +10,12 @@ null_ls.setup {
     debug = false,
     sources = {
         formatting.prettier.with {
-            extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
+            extra_args = { "--single-quote", "--jsx-single-quote" },
         },
-        formatting.black.with { extra_args = { "--fast", "--line-length", "79" } },
-        formatting.google_java_format,
+        formatting.black.with { extra_args = { "--fast", "--line-length", "80" } },
+        --[[ formatting.google_java_format, ]]
         diagnostics.flake8,
+        diagnostics.eslint_d,
+        diagnostics.editorconfig_checker,
     },
 }

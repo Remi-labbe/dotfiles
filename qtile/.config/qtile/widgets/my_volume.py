@@ -1,6 +1,7 @@
 from libqtile import widget
 
-class MyVolume(widget.Volume):
+
+class MyVolume(widget.PulseVolume):
     """Widget that display the volume + emoji"""
 
     def _configure(self, qtile, bar):

@@ -1,1 +1,1 @@
-. "/home/remi/.local/share/cargo/env"
+. "$HOME/.cargo/env"

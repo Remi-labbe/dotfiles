@@ -1,6 +1,7 @@
-vim.opt_local.shiftwidth = 2
-vim.opt_local.tabstop = 2
-vim.opt_local.cmdheight = 2 -- more space in the neovim command line for displaying messages
+vim.opt.colorcolumn = "120"
+vim.o.shiftwidth = 4
+vim.o.tabstop = 4
+vim.o.softtabstop = 4
 
 local status_cmp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not status_cmp_ok then
@@ -111,12 +112,12 @@ local config = {
       --     enabled = "all", -- literals, all, none
       --   },
       -- },
-      -- format = {
-      --   enabled = false,
-      --   settings = {
-      --     profile = "asdf"
-      --   }
-      -- },
+      format = {
+        enabled = true,
+        settings = {
+          profile = home .. "/.local/share/configs_validao/sae-java-code-format.xml"
+        }
+      },
     },
     extendedClientCapabilities = extendedClientCapabilities,
   },
@@ -136,15 +137,24 @@ local config = {
 -- or attaches to an existing client & server depending on the `root_dir`.
 require("jdtls").start_or_attach(config)
 
--- vim.cmd "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_compile JdtCompile lua require('jdtls').compile(<f-args>)"
--- vim.cmd "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_set_runtime JdtSetRuntime lua require('jdtls').set_runtime(<f-args>)"
--- vim.cmd "command! -buffer JdtUpdateConfig lua require('jdtls').update_project_config()"
--- vim.cmd "command! -buffer JdtJol lua require('jdtls').jol()"
--- vim.cmd "command! -buffer JdtBytecode lua require('jdtls').javap()"
--- vim.cmd "command! -buffer JdtJshell lua require('jdtls').jshell()"
+
+vim.cmd "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_compile JdtCompile lua require('jdtls').compile(<f-args>)"
+vim.cmd "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_set_runtime JdtSetRuntime lua require('jdtls').set_runtime(<f-args>)"
+vim.cmd "command! -buffer JdtUpdateConfig lua require('jdtls').update_project_config()"
+vim.cmd "command! -buffer JdtJol lua require('jdtls').jol()"
+vim.cmd "command! -buffer JdtBytecode lua require('jdtls').javap()"
+vim.cmd "command! -buffer JdtJshell lua require('jdtls').jshell()"
+--[[ command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_compile JdtCompile lua require('jdtls').compile(<f-args>) ]]
+--[[ command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_set_runtime JdtSetRuntime lua require('jdtls').set_runtime(<f-args>) ]]
+--[[ command! -buffer JdtUpdateConfig lua require('jdtls').update_project_config() ]]
+--[[ command! -buffer JdtJol lua require('jdtls').jol() ]]
+--[[ command! -buffer JdtBytecode lua require('jdtls').javap() ]]
+--[[ command! -buffer JdtJshell lua require('jdtls').jshell() ]]
 
 local Remap = require("user.keymaps.setup")
 local nnoremap = Remap.nnoremap
 local usercmd = vim.api.nvim_create_user_command
 usercmd("Debugclass", "lua require'jdtls'.test_class()", {})
 usercmd("Debugmethod", "lua require'jdtls'.test_nearest_method()", {})
+
+require("dap.ext.vscode").load_launchjs(--[[ nil, "java" ]])

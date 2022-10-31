@@ -12,3 +12,5 @@ require("user.telescope")
 require("user.trouble")
 --[[ require("user.neogit") ]]
 require("user.toggleterm")
+require("user.nvimtree")
+require("user.gitsigns")
