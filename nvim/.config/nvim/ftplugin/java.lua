@@ -16,7 +16,7 @@ require("user.dap")
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = false
-capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
 local extendedClientCapabilities = jdtls.extendedClientCapabilities
 extendedClientCapabilities.resolveAdditionalTextEditsSupport = true

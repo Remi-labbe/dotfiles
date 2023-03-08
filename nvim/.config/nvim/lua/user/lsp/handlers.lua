@@ -68,7 +68,8 @@ end
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
-M.capabilities = cmp.update_capabilities(M.capabilities)
+--[[ M.capabilities = cmp.update_capabilities(M.capabilities) ]]
+M.capabilities = cmp.default_capabilities(M.capabilities)
 
 local function lsp_highlight_document(client)
   -- if client.server_capabilities.document_highlight then
@@ -80,15 +81,22 @@ local function lsp_highlight_document(client)
   -- end
 end
 
+local format = function()
+  vim.lsp.buf.format {
+    filter = function(client) return client.name ~= "tsserver" end
+  }
+end
+
 local function keymaps()
   local Remap = require("user.keymaps.setup")
+  local telescope_builtin = require('telescope.builtin')
   local nnoremap = Remap.nnoremap
   local inoremap = Remap.inoremap
 
   nnoremap("gD", function() vim.lsp.buf.declaration() end)
   nnoremap("gd", function() vim.lsp.buf.definition() end)
   nnoremap("gi", function() vim.lsp.buf.implementation() end)
-  nnoremap("gr", function() vim.lsp.buf.references() end)
+  nnoremap("gr", function() telescope_builtin.lsp_references() end)
   --[[ nnoremap("K", function() vim.lsp.buf.signature_help() end) ]]
   nnoremap("K", function() vim.lsp.buf.hover() end)
   nnoremap("<leader>ws", function() vim.lsp.buf.workspace_symbol() end)
@@ -100,7 +108,7 @@ local function keymaps()
   nnoremap("<leader>ca", function() vim.lsp.buf.code_action() end)
   nnoremap("<leader>rn", function() vim.lsp.buf.rename() end)
   inoremap("<C-k>", function() vim.lsp.buf.signature_help() end)
-  nnoremap("<leader>ff", function() vim.lsp.buf.formatting() end)
+  nnoremap("<leader>ff", format)
 end
 
 M.on_attach = function(client)
@@ -116,9 +124,6 @@ M.on_attach = function(client)
     -- require("jdtls.setup").add_commands()
   end
 
-  if client.name == "tsserver" then
-    client.resolved_capabilities.document_formatting = false
-  end
 end
 
 return M

@@ -1,9 +1,9 @@
 SCHEME = "gruvbox"
 
-require("tokyonight").setup({
-  style = 'night',
-  dim_inactive = true,
-})
+--[[ require("tokyonight").setup({ ]]
+--[[   style = 'night', ]]
+--[[   dim_inactive = true, ]]
+--[[ }) ]]
 
 require("gruvbox").setup({
   undercurl = true,
@@ -28,6 +28,56 @@ if not cmd_ok then
   vim.notify("colorscheme " .. SCHEME .. " not found!")
   return
 end
+
+--[[ require('colorbuddy').colorscheme('gruvbuddy') ]]
+
+-- TJ STUFF
+
+--[[ local c = require("colorbuddy.color").colors ]]
+--[[ local Group = require("colorbuddy.group").Group ]]
+--[[ local g = require("colorbuddy.group").groups ]]
+--[[ local s = require("colorbuddy.style").styles ]]
+--[[]]
+--[[ Group.new("GoTestSuccess", c.green, nil, s.bold) ]]
+--[[ Group.new("GoTestFail", c.red, nil, s.bold) ]]
+
+-- Group.new('Keyword', c.purple, nil, nil)
+
+--[[ Group.new("TSPunctBracket", c.orange:light():light()) ]]
+--[[]]
+--[[ Group.new("StatuslineError1", c.red:light():light(), g.Statusline) ]]
+--[[ Group.new("StatuslineError2", c.red:light(), g.Statusline) ]]
+--[[ Group.new("StatuslineError3", c.red, g.Statusline) ]]
+--[[ Group.new("StatuslineError3", c.red:dark(), g.Statusline) ]]
+--[[ Group.new("StatuslineError3", c.red:dark():dark(), g.Statusline) ]]
+--[[]]
+--[[ Group.new("pythonTSType", c.red) ]]
+--[[ Group.new("goTSType", g.Type.fg:dark(), nil, g.Type) ]]
+--[[]]
+--[[ Group.new("typescriptTSConstructor", g.pythonTSType) ]]
+--[[ Group.new("typescriptTSProperty", c.blue) ]]
+
+-- vim.cmd [[highlight WinSeparator guifg=#4e545c guibg=None]]
+--[[ Group.new("WinSeparator", nil, nil) ]]
+
+-- I don't think I like highlights for text
+-- Group.new("LspReferenceText", nil, c.gray0:light(), s.bold)
+-- Group.new("LspReferenceWrite", nil, c.gray0:light())
+
+-- Group.new("TSKeyword", c.purple, nil, s.underline, c.blue)
+-- Group.new("LuaFunctionCall", c.green, nil, s.underline + s.nocombine, g.TSKeyword.guisp)
+
+--[[ Group.new("TSTitle", c.blue) ]]
+
+-- TODO: It would be nice if we could only highlight
+-- the text with characters or something like that...
+-- but we'll have to stick to that for later.
+--[[ Group.new("InjectedLanguage", nil, g.Normal.bg:dark()) ]]
+--[[]]
+--[[ Group.new("LspParameter", nil, nil, s.italic) ]]
+--[[ Group.new("LspDeprecated", nil, nil, s.strikethrough) ]]
+
+-- END TJ STUFF
 
 local colorizer_ok, colorizer = pcall(require, "colorizer")
 if not colorizer_ok then
@@ -118,3 +168,139 @@ lualine.setup({
   tabline = {},
   extensions = {}
 })
+
+--[[ local builtin = require "el.builtin" ]]
+--[[ local extensions = require "el.extensions" ]]
+--[[ local sections = require "el.sections" ]]
+--[[ local subscribe = require "el.subscribe" ]]
+--[[ local lsp_statusline = require "el.plugins.lsp_status" ]]
+--[[ local helper = require "el.helper" ]]
+--[[ local diagnostic = require "el.diagnostic" ]]
+--[[]]
+--[[ local has_lsp_extensions, ws_diagnostics = pcall(require, "lsp_extensions.workspace.diagnostic") ]]
+--[[]]
+--[[ local git_icon = subscribe.buf_autocmd("el_file_icon", "BufRead", function(_, bufnr) ]]
+--[[   local icon = extensions.file_icon(_, bufnr) ]]
+--[[   if icon then ]]
+--[[     return icon .. " " ]]
+--[[   end ]]
+--[[]]
+--[[   return "" ]]
+--[[ end) ]]
+--[[]]
+--[[ local git_branch = subscribe.buf_autocmd("el_git_branch", "BufEnter", function(window, buffer) ]]
+--[[   local branch = extensions.git_branch(window, buffer) ]]
+--[[   if branch then ]]
+--[[     return " " .. extensions.git_icon() .. " " .. branch ]]
+--[[   end ]]
+--[[ end) ]]
+--[[]]
+--[[ local git_changes = subscribe.buf_autocmd("el_git_changes", "BufWritePost", function(window, buffer) ]]
+--[[   return extensions.git_changes(window, buffer) ]]
+--[[ end) ]]
+--[[]]
+--[[ local ws_diagnostic_counts = function(_, buffer) ]]
+--[[   if not has_lsp_extensions then ]]
+--[[     return "" ]]
+--[[   end ]]
+--[[]]
+--[[   local messages = {} ]]
+--[[]]
+--[[   local error_count = ws_diagnostics.get_count(buffer.bufnr, "Error") ]]
+--[[]]
+--[[   local x = "⬤" ]]
+--[[   if error_count == 0 then ]]
+--[[     -- pass ]]
+--[[   elseif error_count < 5 then ]]
+--[[     table.insert(messages, string.format("%s#%s#%s%%*", "%", "StatuslineError" .. error_count, x)) ]]
+--[[   else ]]
+--[[     table.insert(messages, string.format("%s#%s#%s%%*", "%", "StatuslineError5", x)) ]]
+--[[   end ]]
+--[[]]
+--[[   return table.concat(messages, "") ]]
+--[[ end ]]
+--[[]]
+--[[ local show_current_func = function(window, buffer) ]]
+--[[   if buffer.filetype == "lua" then ]]
+--[[     return "" ]]
+--[[   end ]]
+--[[]]
+--[[   return lsp_statusline.current_function(window, buffer) ]]
+--[[ end ]]
+--[[]]
+--[[ local minimal_status_line = function(_, buffer) ]]
+--[[   if string.find(buffer.name, "sourcegraph/sourcegraph") then ]]
+--[[     return true ]]
+--[[   end ]]
+--[[ end ]]
+--[[]]
+--[[ local is_sourcegraph = function(_, buffer) ]]
+--[[   if string.find(buffer.name, "sg://") then ]]
+--[[     return true ]]
+--[[   end ]]
+--[[ end ]]
+--[[]]
+--[[ local diagnostic_display = diagnostic.make_buffer() ]]
+--[[]]
+--[[ require("el").setup { ]]
+--[[   generator = function(window, buffer) ]]
+--[[     local is_minimal = minimal_status_line(window, buffer) ]]
+--[[     local is_sourcegraph = is_sourcegraph(window, buffer) ]]
+--[[]]
+--[[     local mode = extensions.gen_mode { format_string = " %s " } ]]
+--[[     if is_sourcegraph then ]]
+--[[       return { ]]
+--[[         { mode }, ]]
+--[[         { sections.split, required = true }, ]]
+--[[         { builtin.file }, ]]
+--[[         { sections.split, required = true }, ]]
+--[[         { builtin.filetype }, ]]
+--[[       } ]]
+--[[     end ]]
+--[[]]
+--[[     local items = { ]]
+--[[       { mode, required = true }, ]]
+--[[       { git_branch }, ]]
+--[[       { " " }, ]]
+--[[       { sections.split, required = true }, ]]
+--[[       { git_icon }, ]]
+--[[       { sections.maximum_width(builtin.file_relative, 0.60), required = true }, ]]
+--[[       { sections.collapse_builtin { { " " }, { builtin.modified_flag } } }, ]]
+--[[       { sections.split, required = true }, ]]
+--[[       { diagnostic_display }, ]]
+--[[       { show_current_func }, ]]
+--[[       -- { lsp_statusline.server_progress }, ]]
+--[[       -- { ws_diagnostic_counts }, ]]
+--[[       { git_changes }, ]]
+--[[       { "[" }, ]]
+--[[       { builtin.line_with_width(3) }, ]]
+--[[       { ":" }, ]]
+--[[       { builtin.column_with_width(2) }, ]]
+--[[       { "]" }, ]]
+--[[       { ]]
+--[[         sections.collapse_builtin { ]]
+--[[           "[", ]]
+--[[           builtin.help_list, ]]
+--[[           builtin.readonly_list, ]]
+--[[           "]", ]]
+--[[         }, ]]
+--[[       }, ]]
+--[[       { builtin.filetype }, ]]
+--[[     } ]]
+--[[]]
+--[[     local add_item = function(result, item) ]]
+--[[       if is_minimal and not item.required then ]]
+--[[         return ]]
+--[[       end ]]
+--[[]]
+--[[       table.insert(result, item) ]]
+--[[     end ]]
+--[[]]
+--[[     local result = {} ]]
+--[[     for _, item in ipairs(items) do ]]
+--[[       add_item(result, item) ]]
+--[[     end ]]
+--[[]]
+--[[     return result ]]
+--[[   end, ]]
+--[[ } ]]

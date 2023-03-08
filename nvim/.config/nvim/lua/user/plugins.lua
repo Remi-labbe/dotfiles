@@ -10,16 +10,23 @@ return require('packer').startup(function(use)
   use("wbthomason/packer.nvim")
 
   -- Colorscheme
-  -- use("gruvbox-community/gruvbox")
+  -- use "gruvbox-community/gruvbox"
   use "ellisonleao/gruvbox.nvim"
-  use "folke/tokyonight.nvim"
+  --[[ use "folke/tokyonight.nvim" ]]
+  use 'tjdevries/colorbuddy.vim'
+  use 'tjdevries/gruvbuddy.nvim'
 
   use "kyazdani42/nvim-web-devicons"
+  --[[ use { ]]
+  --[[   'yamatsum/nvim-nonicons', ]]
+  --[[   requires = { 'kyazdani42/nvim-web-devicons' } ]]
+  --[[ } ]]
 
   use 'lewis6991/impatient.nvim'
   use "j-hui/fidget.nvim"
 
   use "nvim-lualine/lualine.nvim"
+  use "tjdevries/express_line.nvim"
 
   use {
     "nvim-treesitter/nvim-treesitter",
@@ -89,6 +96,9 @@ return require('packer').startup(function(use)
 
   -- Rust
   use "simrat39/rust-tools.nvim"
+
+  -- Typescript
+  use "jose-elias-alvarez/typescript.nvim"
 
   -- Make things easier to see
   use "RRethy/vim-illuminate"
