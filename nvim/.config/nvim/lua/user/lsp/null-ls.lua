@@ -9,8 +9,7 @@ local diagnostics = null_ls.builtins.diagnostics
 null_ls.setup {
   debug = false,
   sources = {
-    --[[ formatting.sql_formatter, ]]
-    formatting.sqlfluff,
+    require("typescript.extensions.null-ls.code-actions"),
     formatting.prettier.with {
       extra_args = { "--single-quote", "--jsx-single-quote" },
     },

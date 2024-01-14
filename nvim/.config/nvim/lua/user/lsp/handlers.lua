@@ -81,22 +81,22 @@ local function lsp_highlight_document(client)
   -- end
 end
 
-local format = function()
-  vim.lsp.buf.format {
+local format = function() vim.lsp.buf.format {
     filter = function(client) return client.name ~= "tsserver" end
   }
 end
 
 local function keymaps()
   local Remap = require("user.keymaps.setup")
-  local telescope_builtin = require('telescope.builtin')
+  local telescopeBuiltins = require("telescope.builtin")
   local nnoremap = Remap.nnoremap
   local inoremap = Remap.inoremap
 
   nnoremap("gD", function() vim.lsp.buf.declaration() end)
   nnoremap("gd", function() vim.lsp.buf.definition() end)
   nnoremap("gi", function() vim.lsp.buf.implementation() end)
-  nnoremap("gr", function() telescope_builtin.lsp_references() end)
+  --[[ nnoremap("gr", function() vim.lsp.buf.references() end) ]]
+  nnoremap("gr", telescopeBuiltins.lsp_references)
   --[[ nnoremap("K", function() vim.lsp.buf.signature_help() end) ]]
   nnoremap("K", function() vim.lsp.buf.hover() end)
   nnoremap("<leader>ws", function() vim.lsp.buf.workspace_symbol() end)

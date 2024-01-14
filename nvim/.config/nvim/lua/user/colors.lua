@@ -1,28 +1,28 @@
-SCHEME = "gruvbox"
+SCHEME = "kanagawa-wave"
 
---[[ require("tokyonight").setup({ ]]
---[[   style = 'night', ]]
---[[   dim_inactive = true, ]]
+--[[ require("gruvbox").setup({ ]]
+--[[   undercurl = true, ]]
+--[[   underline = true, ]]
+--[[   bold = true, ]]
+--[[   italic = { ]]
+--[[     strings = true, ]]
+--[[     comments = true, ]]
+--[[     operators = false, ]]
+--[[     folds = true, ]]
+--[[   }, ]]
+--[[   strikethrough = true, ]]
+--[[   invert_selection = false, ]]
+--[[   invert_signs = false, ]]
+--[[   invert_tabline = false, ]]
+--[[   invert_intend_guides = false, ]]
+--[[   inverse = true,    -- invert background for search, diffs, statuslines and errors ]]
+--[[   contrast = "hard", -- can be "hard", "soft" or empty string ]]
+--[[   overrides = {}, ]]
+--[[   dim_inactive = false, ]]
+--[[   transparent_mode = false, ]]
 --[[ }) ]]
 
-require("gruvbox").setup({
-  undercurl = true,
-  underline = true,
-  bold = true,
-  italic = true,
-  strikethrough = true,
-  invert_selection = false,
-  invert_signs = false,
-  invert_tabline = false,
-  invert_intend_guides = false,
-  inverse = true, -- invert background for search, diffs, statuslines and errors
-  contrast = "hard", -- can be "hard", "soft" or empty string
-  overrides = {},
-  dim_inactive = false,
-  transparent_mode = false,
-})
-
-vim.opt.background = "dark"
+--[[ vim.opt.background = "dark" ]]
 local cmd_ok, _ = pcall(vim.cmd, "colorscheme " .. SCHEME)
 if not cmd_ok then
   vim.notify("colorscheme " .. SCHEME .. " not found!")
@@ -116,15 +116,15 @@ local diff = {
 local filename = {
   "filename",
   file_status = true, -- Displays file status (readonly status, modified status)
-  path = 1, -- 0: Just the filename
+  path = 4,           -- 0: Just the filename
   -- 1: Relative path
   -- 2: Absolute path
 
   shorting_target = 30, -- Shortens path to leave 40 spaces in the window
   -- for other components. (terrible name, any suggestions?)
   symbols = {
-    modified = ' [+]', -- Text to show when the file is modified.
-    readonly = ' [RO]', -- Text to show when the file is non-modifiable or readonly.
+    modified = ' [+]',     -- Text to show when the file is modified.
+    readonly = ' [RO]',    -- Text to show when the file is non-modifiable or readonly.
     unnamed = '[No Name]', -- Text to show for unnamed buffers.
   }
 }

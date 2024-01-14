@@ -3,17 +3,10 @@ if not status_ok then
   return
 end
 
-local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
-if not config_status_ok then
-  return
-end
-
-local tree_cb = nvim_tree_config.nvim_tree_callback
-
 nvim_tree.setup {
   renderer = {
     highlight_opened_files = "none",
-    root_folder_modifier = ":t",
+    root_folder_label = ":t",
     indent_markers = {
       enable = false,
       icons = {
@@ -23,7 +16,16 @@ nvim_tree.setup {
       },
     },
     icons = {
-      webdev_colors = true,
+      web_devicons = {
+        file = {
+          enable = true,
+          color = true,
+        },
+        folder = {
+          enable = false,
+          color = true,
+        },
+      },
       git_placement = "before",
       padding = " ",
       symlink_arrow = " ➛ ",
@@ -37,8 +39,6 @@ nvim_tree.setup {
         default = "",
         symlink = "",
         folder = {
-          --[[ arrow_open = icons.ui.ArrowOpen, ]]
-          --[[ arrow_closed = icons.ui.ArrowClosed, ]]
           default = "",
           open = "",
           empty = "",
@@ -72,14 +72,6 @@ nvim_tree.setup {
     update_cwd = true,
     ignore_list = {},
   },
-  -- system_open = {
-  --   cmd = nil,
-  --   args = {},
-  -- },
-  -- filters = {
-  --   dotfiles = false,
-  --   custom = {},
-  -- },
   git = {
     enable = true,
     ignore = true,
@@ -87,19 +79,16 @@ nvim_tree.setup {
   },
   view = {
     width = 30,
-    height = 30,
-    hide_root_folder = false,
     side = "left",
-    -- auto_resize = true,
-    mappings = {
-      custom_only = false,
-      list = {
-        { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
-        { key = "h", cb = tree_cb "close_node" },
-        { key = "v", cb = tree_cb "vsplit" },
-      },
-    },
-    number = false,
-    relativenumber = false,
+    number = true,
+    relativenumber = true,
   },
+  -- mappings = {
+  --   custom_only = false,
+  --   list = {
+  --     { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
+  --     { key = "h",                  cb = tree_cb "close_node" },
+  --     { key = "v",                  cb = tree_cb "vsplit" },
+  --   },
+  -- },
 }
