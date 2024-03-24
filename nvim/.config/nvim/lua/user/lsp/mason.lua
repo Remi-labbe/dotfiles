@@ -170,3 +170,5 @@ lspconfig.gopls.setup(config())
 lspconfig.terraformls.setup(config())
 
 lspconfig.bufls.setup(config())
+
+lspconfig.tailwindcss.setup(config())

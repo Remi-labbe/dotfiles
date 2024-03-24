@@ -1,7 +1,7 @@
 ! Remi Labbe Xresources config
 ! github.com/Remi-labbe
 
-Xft.dpi: 128
+Xft.dpi: 104
 Xft.antialias: true
 Xft.hinting: true
 Xft.rgba: rgba

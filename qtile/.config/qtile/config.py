@@ -73,33 +73,29 @@ keys = [
         lazy.window.kill(),
         desc="Kill focused window",
     ),
-    Key(
-        [mod], "period", lazy.next_screen(), desc="Move focus to next monitor"
-    ),
+    Key([mod], "period", lazy.next_screen(), desc="Move focus to next monitor"),
     Key([mod], "comma", lazy.prev_screen(), desc="Move focus to prev monitor"),
     Key([mod, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
-    Key(
-        [mod, "shift"], "q", lazy.spawn("dm_sysact"), desc="Reload the config"
-    ),
+    Key([mod, "shift"], "q", lazy.spawn("dm_sysact"), desc="Reload the config"),
     Key([mod], "p", lazy.spawn(dmenu_run), desc="Run dmenu"),
     Key([mod], "backslash", lazy.spawn("dm_maim"), desc="Run dmenu"),
     # SOUND
     Key(
         [],
         "XF86AudioMute",
-        lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle"),
+        lazy.spawn("pamixer -t"),
         desc="mute sound",
     ),
     Key(
         [],
         "XF86AudioRaiseVolume",
-        lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%"),
+        lazy.spawn("pamixer -i 5"),
         desc="volume +",
     ),
     Key(
         [],
         "XF86AudioLowerVolume",
-        lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%"),
+        lazy.spawn("pamixer -d 5"),
         desc="volume -",
     ),
     Key(
@@ -165,6 +161,14 @@ TokyoNight = dict(
     accent2="#bb9af7",
 )
 
+Kanagawa = dict(
+    gray1="#1a1b26",
+    gray2="#414868",
+    gray3="#c0caf5",
+    accent1="#7aa2f7",
+    accent2="#bb9af7",
+)
+
 COLORS = Gruvbox
 
 layout_theme = {
@@ -200,6 +204,12 @@ extension_defaults = widget_defaults.copy()
 
 def widgets():
     return [
+        widget.CurrentScreen(
+            active_color=COLORS["accent1"],
+            inactive_color=COLORS["gray1"],
+            active_text="⬤",
+            inactive_text="⬤",
+        ),
         widget.GroupBox(
             highlight_method="block",
             hide_unused=True,
@@ -220,14 +230,26 @@ def widgets():
             padding=10,
             foreground=COLORS["gray1"],
             background=COLORS["accent1"],
+            max_chars=80,
         ),
         MyVolume(
             padding=5,
         ),
+        widget.Battery(
+            padding=10,
+            charge_char="🔌",
+            discharge_char="🔋",
+            full_char="✅",
+            unknown_char="🔋",
+            show_short_text=False,
+            low_percentage=0.25,
+            format="{char}{percent:2.0%}",
+            update_interval=20,
+        ),
         # widget.PulseVolume(
         #     padding=5,
         # ),
-        widget.Clock(padding=5, format="📅 %Y %b %d (%a) 🕓 %I:%M %p"),
+        widget.Clock(padding=5, format="📅 %Y %b %d (%a) 🕓 %H:%M"),
         widget.Systray(),
     ]
 
@@ -236,17 +258,21 @@ def widget_screen1():
     return widgets()
 
 
+# removing status widgets from second screen
 def widget_screen2():
-    widgets_s2 = widgets()
-    # removing status widgets from second screen
-    del widgets_s2[3:6]
-    return widgets_s2
+    return widgets()[:-1]
 
 
 screens = [
     Screen(
         top=bar.Bar(
             widget_screen1(),
+            28,
+        ),
+    ),
+    Screen(
+        top=bar.Bar(
+            widget_screen2(),
             28,
         ),
     ),

@@ -24,6 +24,7 @@ toggleterm.setup {
 
 local Terminal = require("toggleterm.terminal").Terminal
 local lazygit = Terminal:new {
+  size = 15,
   cmd = "lazygit",
   hidden = true,
   direction = "float",
